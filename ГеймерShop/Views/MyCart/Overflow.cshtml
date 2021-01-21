@@ -1,0 +1,18 @@
+﻿@model ГеймерShop.Models.Cart
+
+<input>
+
+<span>
+    К сожалению выбранный вами товар в недостатке.. Доступно: <br />
+</span>
+
+@foreach (var item in Model.Lines())
+{
+    <p>@item.Count x @item.Game.Name </p>
+}
+<span>
+    Желаете продолжить с имеющимся количеством? <br />
+</span>
+
+<a class="btn btn-info" asp-action="MyCart">Вернуться</a>
+<a class="btn btn-info" asp-action="OverflowNext">Продолжить</a>
