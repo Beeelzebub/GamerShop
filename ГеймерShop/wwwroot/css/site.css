@@ -7,11 +7,6 @@ a.navbar-brand {
   word-break: break-all;
 }
 
-/* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
-}
-
 .btn-primary {
   color: #fff;
   background-color: #1b6ec2;
@@ -59,13 +54,252 @@ html {
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+    background-image: url(/images/wp4412356.gif);
+    background-size: 100%;
+    background-attachment: fixed;
+   
 }
 .footer {
   position: absolute;
   bottom: 0;
   width: 100%;
   white-space: nowrap;
+  border: none !important;
+  color: yellow !important;
+  font-family: Product;
   line-height: 60px; /* Vertically center the text there */
 }
+
+.btn-outlined.btn-game {
+    background: none;
+    color: yellow;
+    border-color: yellow;
+    border-radius: 8px;
+    font-family: Product;
+}
+
+    .btn-outlined.btn-game:hover,
+    .btn-outlined.btn-game:active {
+        color: #00d4ff;
+        background: black;
+        border-color: black;
+    }
+
+.fa {
+    color: yellow;
+}
+
+@font-face {
+    font-family: "Pixel";
+    src: url(/fonts/12081.ttf); 
+}
+
+@font-face {
+    font-family: "Logo";
+    src: url(/fonts/11142.otf); 
+}
+
+@font-face {
+    font-family: "Product";
+    src: url(/fonts/12177.ttf); 
+}
+
+.logo {
+    font-family: Logo;
+    color: yellow;
+    font-size: 74px;
+}
+
+.search {
+    border-width: 4px;
+    font-family: Product;
+    border-color: yellow;
+}
+
+.header-game {
+    height: 100px;
+}
+
+.filter-space {
+    height: 250px;
+
+}
+
+.card-element {
+    margin: 2%;
+    padding: 0%;
+}
+
+.card-body {
+    width: 215px !important;
+    height: 267px !important;
+    padding: 0% !important;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.product-wrap {
+    width: 215px;
+    margin: 2%;
+    padding: 10px 10px 20px 10px;
+    background: rgb(0,0,0,0.5);
+    text-align: center;
+    font-size: 14px;
+    font-family: Product;
+    text-transform: uppercase;
+    border-width: 4px !important;
+    border-radius: 8px;
+    border-color: yellow !important;
+    border: double;
+}
+
+img {
+    border-radius: 8px;
+}
+
+.product-item {
+    position: relative;
+    overflow: hidden;
+}
+
+.product-wrap img {
+    display: block;
+    width: 100%;
+}
+
+.product-buttons {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .8);
+    opacity: 0;
+    transition: .3s ease-in-out;
+}
+
+.button {
+    text-decoration: none !important;
+    color: yellow;
+    font-size: 12px;
+    line-height: 36px;
+    position: absolute;
+    width: 140px;
+    height: 40px;
+    top: 50%;
+    left: 50%;
+    border: 2px solid yellow;
+    transform: translate(-50%, -50%) scale(0);
+    transition: .3s ease-in-out;
+}
+
+    .button:before {
+        font-family: Product;
+        margin-right: 10px;
+    }
+
+.product-item:hover .product-buttons {
+    opacity: 1;
+}
+
+.product-item:hover .button {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.button:hover {
+    background: black;
+    color: #00d4ff;
+}
+
+.product-title {
+    color: yellow;
+}
+
+    .product-title a {
+        text-decoration: none !important;
+        color: yellow;
+        font-weight: 600;
+        margin: 5px 0 5px;
+        padding-bottom: 7px;
+        display: block;
+        position: relative;
+        transition: .3s ease-in-out;
+    }
+
+        .product-title a:after {
+            content: "";
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background: yellow;
+            left: 50%;
+            margin-left: -20px;
+            bottom: 0;
+            transition: .3s ease-in-out;
+        }
+
+        .product-title a:hover {
+            color: #00d4ff;
+        }
+
+    .product-title:hover a:after {
+        background: yellow;
+    }
+
+.product-price {
+    font-size: 20px;
+    color: yellow;
+    font-weight: 700;
+}
+
+
+.custom-select {
+    background-color: black;
+    background-size: 10% 50%;
+    color: yellow;
+    border-radius: 8px;
+    height: 40px;
+    width: 100%;
+    border: solid 2px #00d4ff;
+    font-family: Product;
+}
+
+    .custom-select option, option {
+        background: yellow;
+        color: black;
+        border: 2px !important;
+        border-radius: 8px !important;
+        border-bottom: 4px solid deeppink !important;
+        height: 30px;
+        font-family: Product;
+    }
+
+.panel {
+    background: rgb(0,0,0,0.5);
+    border-radius: 8px;
+}
+
+.h-40 {
+    height: 40%;
+}
+
+.text-game {
+    font-family: Product;
+}
+
+.fa:hover {
+    color: #00d4ff !important;
+}
+
+.link-game {
+    text-decoration: none !important;
+    color: yellow;
+    font-family: Product;
+}
+    .link-game:hover {
+        color: #00d4ff !important;
+    }

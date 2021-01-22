@@ -24,11 +24,11 @@ namespace ГеймерShop.Controllers
         public async Task<IActionResult> Index()
         {
             var genres = await _context.Genres.ToListAsync();
-            genres.Add(new Genre { Id = 0, Name = "Любой" });
+            genres.Add(new Genre { Id = 0, Name = "Любой жанр" });
             genres.Reverse();
 
             var plaingField = await _context.PlaingFields.ToListAsync();
-            plaingField.Add(new PlaingField { Id = 0, Name = "Любая" });
+            plaingField.Add(new PlaingField { Id = 0, Name = "Любая площадка" });
             plaingField.Reverse();
 
             var systemReq = await _context.SystemRequirements.ToListAsync();
@@ -51,10 +51,8 @@ namespace ГеймерShop.Controllers
 
             ViewData["Genres"] = new SelectList(genres, "Id", "Name", 0);
             ViewData["PlaingFields"] = new SelectList(plaingField, "Id", "Name", 0);
-            ViewData["OSs"] = new SelectList(OSs, 0);
-            ViewData["CPUs"] = new SelectList(CPUs, 0);
-            ViewData["RAMs"] = new SelectList(RAMs, 0);
-            ViewData["GPUs"] = new SelectList(GPUs, 0);
+            
+            ViewData["Price"] = new SelectList(new List<string>{ "Все цены", "До 30", "До 40", "До 50"}, 0);
 
             var applicationDbContext = _context.Games.Include(g => g.Genre)
                 .Include(g => g.Picture)

@@ -4,62 +4,50 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<div class="row mb-4 filter-space align-items-end">
+    <form class="w-100 h-40" id="filter" asp-action="Filter">
+        <div class="form-row h-100 panel align-items-center">
+            <div class="form-group col-3 mb-0">
+                <select id="Genres" name="Genres" class="custom-select form-control mr-5" asp-items="ViewBag.Genres"
+                        onclick="$('#Genres').css('background-color','black').css('color', 'yellow');"
+                        onchange="$('#Genres').blur()"></select>
+            </div>
+            <div class="form-group col-3 mb-0">
+                <select id="PlaingFields" name="PlaingFields" class="custom-select form-control mr-5" asp-items="ViewBag.PlaingFields"
+                        onclick="$('#PlaingFields').css('background-color','black').css('color', 'yellow');"
+                        onchange="$('#PlaingFields').blur()"></select>
+            </div>
+            <div class="form-group col-3 mb-0">
+                <select id="Price" name="Price" class="custom-select form-control" asp-items="ViewBag.Price"
+                        onclick="$('#Price').css('background-color','black').css('color', 'yellow');"
+                        onchange="$('#Price').blur()"></select>
+            </div>
+            <div class="form-group offset-1 col-2 mb-0">
+                <input type="button" value="Фильтровать" class="btn btn-outlined btn-block btn-game" onclick="filter()" />
+            </div>
+        </div>
+    </form>
+</div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Picture)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SystemRequirements)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Genre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PlaingField)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Picture.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SystemRequirements.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Genre.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PlaingField.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="container-fluid">
+    @for (int i = 0; i < 4; i++)
+    {
+        <div class="row justify-content-center">
+            @for (int j = 0; j < 4; j++)
+            {
+                <div class="product-wrap">
+                    <div class="product-item">
+                        <img src="~/images/266px-The_Witcher_3-_Wild_Hunt_Cover.jpg" width="215" height="267">
+                        <div class="product-buttons">
+                            <a href="" class="button">В корзину</a>
+                        </div>
+                    </div>
+                    <div class="product-title">
+                        <a href="">The Witcher 3: Wild Hunt</a>
+                        <span class="product-price">Br 1999</span>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
