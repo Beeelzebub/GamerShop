@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -55,6 +56,7 @@ namespace ГеймерShop.Controllers
             var gamesWithKey = await _context.Keys.Where(p => p.KeyStatusId == 1).Select(p => p.GameId).Distinct().ToListAsync();
 
             var games = await _context.Games
+                .Where(g => gamesWithKey.Contains(g.Id))
                 .Include(g => g.Genre)
                 .Include(g => g.Picture)
                 .Include(g => g.PlaingField)
@@ -78,6 +80,7 @@ namespace ГеймерShop.Controllers
             return PartialView("Assortment", games);
         }
 
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Create()
         {
             ViewData["GenreId"] = new SelectList(_context.Set<Genre>(), "Id", "Name");
@@ -92,6 +95,7 @@ namespace ГеймерShop.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(GameViewModel model)
         {
@@ -147,6 +151,7 @@ namespace ГеймерShop.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Management()
         {
             var games = _context.Games
@@ -158,6 +163,7 @@ namespace ГеймерShop.Controllers
             return View(await games.ToListAsync());
         }
 
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -200,6 +206,7 @@ namespace ГеймерShop.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int? id, GameViewModel model)
         {
@@ -303,6 +310,7 @@ namespace ГеймерShop.Controllers
             return View(game);
         }
 
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)

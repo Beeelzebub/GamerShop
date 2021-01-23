@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -21,6 +22,7 @@ namespace ГеймерShop.Controllers
             _context = context;
         }
 
+        [Authorize]
         public async Task<IActionResult> MyHistory()
         {
             var orders = await _context.Orders
@@ -30,6 +32,7 @@ namespace ГеймерShop.Controllers
             return View(orders);
         }
 
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> AllHistory()
         {
             var orders = await _context.Orders

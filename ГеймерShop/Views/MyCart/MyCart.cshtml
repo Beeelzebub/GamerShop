@@ -12,10 +12,10 @@
         <table class="table text-game">
             <thead>
                 <tr>
-                    <th>
+                    <th class="w-60">
                         Товар
                     </th>
-                    <th>
+                    <th class="w-20">
                         Цена
                     </th>
                     <th></th>
@@ -26,10 +26,10 @@
                 @foreach (var item in Model.Lines())
                 {
                     <tr>
-                        <td>
+                        <td class="w-60">
                             @item.Game.Name
                         </td>
-                        <td>
+                        <td class="w-20">
                             @item.Count x @item.Game.Price
                         </td>
                         <td>
@@ -51,8 +51,8 @@
             </tfoot>
         </table>
 
-        <div class="row justify-content-center">
-            <a type="button" asp-controller="MyCart" asp-action="PaymentInfo" class="btn buy-btn"> Оплатить </a>
+        <div class="row justify-content-center pt-3 pb-5">
+            <a type="button" asp-controller="MyCart" asp-action="PaymentInfo" class="btn btn-outlined btn-game"> Оплатить </a>
         </div>
 
     }

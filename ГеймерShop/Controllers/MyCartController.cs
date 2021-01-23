@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -44,6 +45,7 @@ namespace ГеймерShop.Controllers
             return RedirectToAction(nameof(PaymentInfo));
         }
 
+        [Authorize]
         public IActionResult PaymentInfo()
         {
             bool overflow = false;
@@ -85,6 +87,7 @@ namespace ГеймерShop.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult PaymentInfo(PaymentInfoViewModel model)
         {
             if (ModelState.IsValid)
@@ -98,6 +101,7 @@ namespace ГеймерShop.Controllers
             return View(model);
         }
 
+        [Authorize]
         public async Task<IActionResult> Pay()
         {
             string emailBodyText = "Ваша покупка. Good luck! Have fun!\n";

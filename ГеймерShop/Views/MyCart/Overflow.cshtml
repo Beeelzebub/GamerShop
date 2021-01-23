@@ -1,16 +1,21 @@
 ﻿@model ГеймерShop.Models.Cart
 
-<span>
-    К сожалению выбранный вами товар в недостатке.. Доступно: <br />
-</span>
+<div class="row justify-content-cente panel">
+    <div class="col text-center text-game pt-5 pb-5">
+            <span>
+                К сожалению, выбранный вами товар в недостатке... Доступно: <br />
+            </span>
 
-@foreach (var item in Model.Lines())
-{
-    <p>@item.Count x @item.Game.Name </p>
-}
-<span>
-    Желаете продолжить с имеющимся количеством? <br />
-</span>
-
-<a class="btn btn-info" asp-action="MyCart">Вернуться</a>
-<a class="btn btn-info" asp-action="OverflowNext">Продолжить</a>
+            @foreach (var item in Model.Lines())
+            {
+                <p>@item.Count x @item.Game.Name </p>
+            }
+            <span>
+                Желаете продолжить с имеющимся количеством? <br />
+            </span>
+        <div class="row justify-content-center pt-5 pb-5">
+            <a class="btn btn-outlined btn-game mr-5" asp-action="MyCart">Вернуться</a>
+            <a class="btn btn-outlined btn-game" asp-action="OverflowNext">Продолжить</a>
+        </div>
+    </div>
+</div>

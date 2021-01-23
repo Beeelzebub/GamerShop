@@ -1,49 +1,54 @@
 ﻿@model IEnumerable<ГеймерShop.Models.Order>
 
-@{
-    ViewData["Title"] = "AllHistory";
-}
-
 <div class="row header-game"></div>
 <div class="container-fluid panel ">
-    <table class="table text-game">
-        <thead>
-            <tr>
-                <th>
-                    Покупатель
-                </th>
-                <th>
-                    Почта
-                </th>
-                <th>
-                    Дата
-                </th>
-                <th>
-                    Товар
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+    @if (Model.Count() == 0)
+    {
+        <div class="row justify-content-center">
+            <span class="text-game pt-5 pb-5">История пуста</span>
+        </div>
+    }
+    else
+    {
+        <table class="table text-game">
+            <thead>
                 <tr>
-                    <td>
-                        @item.Customer.UserName
-                    </td>
-                    <td>
-                        @item.Email
-                    </td>
-                    <td>
-                        @item.OrderDate.ToShortDateString();
-                    </td>
-                    <td>
-                        @foreach (CartLine cart in item.GetCartObject().Lines())
-                        {
-                            <p>@cart.Count x @cart.Game.Name</p>
-                        }
-                    </td>
+                    <th>
+                        Покупатель
+                    </th>
+                    <th>
+                        Почта
+                    </th>
+                    <th>
+                        Дата
+                    </th>
+                    <th>
+                        Товар
+                    </th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @item.Customer.UserName
+                        </td>
+                        <td>
+                            @item.Email
+                        </td>
+                        <td>
+                            @item.OrderDate.ToShortDateString()
+                        </td>
+                        <td>
+                            @foreach (CartLine cart in item.GetCartObject().Lines())
+                            {
+                                <p>@cart.Count x @cart.Game.Name</p>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
 </div>

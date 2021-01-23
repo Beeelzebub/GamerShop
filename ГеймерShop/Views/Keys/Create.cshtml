@@ -1,37 +1,36 @@
 ﻿@model ГеймерShop.Models.Key
 
-@{
-    ViewData["Title"] = "Create";
-}
-
-<h1>Create</h1>
-
-<h4>Key</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" value="1" asp-for="KeyStatusId" />
-            <div class="form-group">
-                <label asp-for="Value" class="control-label"></label>
-                <input asp-for="Value" class="form-control" />
-                <span asp-validation-for="Value" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="GameId" class="control-label"></label>
-                <select asp-for="GameId" class="form-control" asp-items="ViewBag.GameId"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+<div class="row header-game"></div>
+<div class="container-fluid panel text-game">
+    <div class="row justify-content-center pt-5 pb-5">
+        <h2>Добавление Ключа</h2>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-4 text-center">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" value="1" asp-for="KeyStatusId" />
+                <div class="form-group">
+                    <label asp-for="Value" class="control-label"></label>
+                    <input asp-for="Value" class="form-control input-game" />
+                    <span asp-validation-for="Value" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="GameId" class="control-label"></label>
+                    <select asp-for="GameId" class="form-control custom-select" asp-items="ViewBag.GameId"></select>
+                </div>
+                <div class="form-group pt-5">
+                    <input type="submit" value="Создать" class="btn btn-outlined btn-game" />
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row justify-content-center pt-1 pb-5">
+        <a asp-controller="Games" asp-action="Management">Назад</a>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

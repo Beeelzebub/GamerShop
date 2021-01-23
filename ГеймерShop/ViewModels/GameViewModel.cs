@@ -10,34 +10,46 @@ namespace ГеймерShop.ViewModels
     public class GameViewModel
     {
 
-        public int Id { get; set;
-        }
-        [Required]
+        public int Id { get; set; }
+
+        [Display(Name = "Название")]
+        [Required(ErrorMessage = "Поле должно быть заполнено")]
         public string Name { get; set; }
 
-        [Required]
+
+        [Display(Name = "Цена")]
+        [Required(ErrorMessage = "Поле должно быть заполнено")]
         public float Price { get; set; }
 
-        [Required]
+        [Display(Name = "Операционная система")]
+        [Required(ErrorMessage = "Поле должно быть заполнено")]
         public string OS { get; set; }
 
-        [Required]
+        [Display(Name = "Игровая платформа")]
+        [Required(ErrorMessage = "Поле должно быть заполнено")]
         public int PlaingFieldId { get; set; }
 
-        [Required]
+        [Display(Name = "Процессор")]
+        [Required(ErrorMessage = "Поле должно быть заполнено")]
         public string CPU { get; set; }
 
-        [Required]
+        [Display(Name = "Оперативная память")]
+        [Required(ErrorMessage = "Поле должно быть заполнено")]
         public string RAM { get; set; }
 
-        [Required]
+        [Display(Name = "Видеокарта")]
+        [Required(ErrorMessage = "Поле должно быть заполнено")]
         public string GPU { get; set; }
 
-        [Required]
+        [Display(Name = "Память")]
+        [Required(ErrorMessage = "Поле должно быть заполнено")]
         public string Memory { get; set; }
 
-        [Required]
+        [Display(Name = "Жанр")]
+        [Required(ErrorMessage = "Поле должно быть заполнено")]
         public int GenreId { get; set; }
+
+        [Display(Name = "Изображение")]
         public IFormFile Image { get; set; }
 
     }

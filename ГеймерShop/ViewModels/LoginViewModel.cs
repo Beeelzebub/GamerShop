@@ -8,11 +8,11 @@ namespace ГеймерShop.ViewModels
 {
     public class LoginViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Поле должно быть заполнено")]
         [Display(Name = "Логин")]
         public string UserName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Поле должно быть заполнено")]
         [DataType(DataType.Password)]
         [Display(Name = "Пароль")]
         public string Password { get; set; }

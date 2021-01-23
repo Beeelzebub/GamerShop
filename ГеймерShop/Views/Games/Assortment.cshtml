@@ -1,11 +1,17 @@
 ﻿@model IEnumerable<ГеймерShop.Models.Game>
 @if (Model.Count() == 0)
 {
-    <span> По вашему запросу ничего не найдено. </span>
+    <div class="container-fluid panel text-game text-center">
+        <div class="row justify-content-center pt-5 pb-5">
+            <span> По вашему запросу ничего не найдено. </span>
+        </div>
+    </div>
 }
 else
 {
-    List<Game> row = new List<Game>(); int counter = 0; 
+    List<Game>
+        row = new List<Game>
+            (); int counter = 0;
     @foreach (var item1 in Model)
     {
         row.Add(item1);

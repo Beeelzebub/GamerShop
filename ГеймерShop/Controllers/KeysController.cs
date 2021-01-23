@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +20,7 @@ namespace ГеймерShop.Controllers
             _context = context;
         }
 
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Index(int? id)
         {
             if (id == null)
@@ -30,6 +32,7 @@ namespace ГеймерShop.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Create()
         {
             ViewData["GameId"] = new SelectList(_context.Games, "Id", "Name");
@@ -37,7 +40,9 @@ namespace ГеймерShop.Controllers
             return View();
         }
 
+
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Create(Key key)
         {
             if (ModelState.IsValid)
@@ -53,6 +58,7 @@ namespace ГеймерShop.Controllers
             return View(key);
         }
 
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)

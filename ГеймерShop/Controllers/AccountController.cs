@@ -105,6 +105,7 @@ namespace ГеймерShop.Controllers
             return View(model);
         }
 
+        
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
