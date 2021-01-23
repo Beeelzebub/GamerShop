@@ -33,33 +33,49 @@ namespace ГеймерShop.Controllers
 
             var systemReq = await _context.SystemRequirements.ToListAsync();
 
-            var OSs = systemReq.Select(s => s.OS).Distinct().ToList();
-            OSs.Add("Любая");
-            OSs.Reverse();
-
-            var CPUs = systemReq.Select(s => s.CPU).Distinct().ToList();
-            OSs.Add("Любой");
-            CPUs.Reverse();
-
-            var RAMs = systemReq.Select(s => s.RAM).Distinct().ToList();
-            RAMs.Add("Любая");
-            RAMs.Reverse();
-
-            var GPUs = systemReq.Select(s => s.GPU).Distinct().ToList();
-            GPUs.Add("Любая");
-            GPUs.Reverse();
-
-            ViewData["Genres"] = new SelectList(genres, "Id", "Name", 0);
-            ViewData["PlaingFields"] = new SelectList(plaingField, "Id", "Name", 0);
+            ViewData["Genres"] = new SelectList(genres, "Name", "Name", 0);
+            ViewData["PlaingFields"] = new SelectList(plaingField, "Name", "Name", 0);
             
             ViewData["Price"] = new SelectList(new List<string>{ "Все цены", "До 30", "До 40", "До 50"}, 0);
 
-            var applicationDbContext = _context.Games.Include(g => g.Genre)
+            var gamesWithKey = await _context.Keys.Where(p => p.KeyStatusId == 1).Select(p => p.GameId).Distinct().ToListAsync();
+
+            var applicationDbContext = _context.Games
+                .Where(g => gamesWithKey.Contains(g.Id))
+                .Include(g => g.Genre)
                 .Include(g => g.Picture)
                 .Include(g => g.PlaingField)
                 .Include(g => g.SystemRequirements);
 
             return View(await applicationDbContext.ToListAsync());
+        }
+
+        public async Task<IActionResult> Filter([Bind("Genre, PlaingField, Price")] FilterViewModel model)
+        {
+            var gamesWithKey = await _context.Keys.Where(p => p.KeyStatusId == 1).Select(p => p.GameId).Distinct().ToListAsync();
+
+            var games = await _context.Games
+                .Include(g => g.Genre)
+                .Include(g => g.Picture)
+                .Include(g => g.PlaingField)
+                .Include(g => g.SystemRequirements)
+                .ToListAsync();
+
+            if (model.Price != "Все цены")
+            {
+                int limit = model.Price == "До 30" ? 30 : (model.Price == "До 40" ? 40 : 50);
+                games = games.Where(g => g.Price < limit).ToList();
+            }
+            if (model.PlaingField != "Любая площадка")
+            {
+                games = games.Where(g => g.PlaingField.Name == model.PlaingField).ToList();
+            }
+            if (model.Genre != "Любой жанр")
+            {
+                games = games.Where(g => g.Genre.Name == model.Genre).ToList();
+            }
+
+            return PartialView("Assortment", games);
         }
 
         public async Task<IActionResult> Create()
@@ -161,6 +177,7 @@ namespace ГеймерShop.Controllers
 
             GameViewModel model = new GameViewModel
             {
+                Id = game.Id,
                 Name = game.Name,
                 Price = game.Price,
                 OS = game.SystemRequirements.OS,
@@ -227,7 +244,7 @@ namespace ГеймерShop.Controllers
                 _context.Games.Update(game);
                 await _context.SaveChangesAsync();
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Management));
             }
 
 
@@ -249,14 +266,41 @@ namespace ГеймерShop.Controllers
             {
                 searchName = "";
             }
+            var gamesWithKey = await _context.Keys.Where(p => p.KeyStatusId == 1)
+                .Select(p => p.GameId).Distinct().ToListAsync();
+
             var games = await _context.Games
                 .Include(g => g.Picture)
                 .Include(g => g.PlaingField)
                 .Include(g => g.SystemRequirements)
                 .Where(g => g.Name.Contains(searchName))
+                .Where(g => gamesWithKey.Contains(g.Id))
                 .ToListAsync();
 
             return PartialView("Assortment", games);
+        }
+
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var game = await _context.Games
+                .Include(g => g.Genre)
+                .Include(g => g.Picture)
+                .Include(g => g.PlaingField)
+                .Include(g => g.SystemRequirements)
+                .Where(g => g.Id == id)
+                .FirstOrDefaultAsync();
+
+            if (game == null)
+            {
+                return NotFound();
+            }
+
+            return View(game);
         }
 
         public async Task<IActionResult> Delete(int? id)

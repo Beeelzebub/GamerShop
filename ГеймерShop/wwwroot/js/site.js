@@ -1,4 +1,22 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿function AddInCart(id) {
+    $.get('/MyCart/Add', { Id: id }, function (data) {
+        $('#modal-info').html(data);
+        $('#smallModal').modal({
+            show: true
+        });
+    });
+}
 
-// Write your JavaScript code.
+function search() {
+    var searchInput = $('#searachString').val();
+
+    $('#products').load('/Games/Search', { searchName: searchInput });
+}
+
+function filter() {
+    $('#products').load('/Games/Filter', {
+        Genre: $('#Genres').val(),
+        PlaingField: $('#PlaingFields').val(),
+        Price: $('#Price').val()
+    });
+}

@@ -30,7 +30,7 @@ namespace ГеймерShop.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
             ViewData["GameId"] = new SelectList(_context.Games, "Id", "Name");
 
@@ -38,16 +38,17 @@ namespace ГеймерShop.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Value,GameId,KeyStatusId")] Key key)
+        public async Task<IActionResult> Create(Key key)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(key);
+                await _context.AddAsync(key);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index), key.GameId);
+
+                return RedirectToAction("Management", "Games");
             }
-            ViewData["GameId"] = new SelectList(_context.Games, "Id", "Name", key.GameId);
+
+            ViewData["GameId"] = new SelectList(_context.Games, "Id", "Name");
 
             return View(key);
         }
@@ -66,13 +67,13 @@ namespace ГеймерShop.Controllers
                 return NotFound();
             }
 
-            int gameId = key.GameId;
+            int? gameId = key.GameId;
 
             _context.Keys.Remove(key);
             await _context.SaveChangesAsync();
 
-            return View(nameof(Index), gameId);
+            return RedirectToAction(nameof(Index), new { id = gameId });
         }
-
+        
     }
 }

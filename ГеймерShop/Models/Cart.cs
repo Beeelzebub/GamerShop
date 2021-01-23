@@ -30,7 +30,7 @@ namespace ГеймерShop.Models
             }
             else
             {
-                line.Count -= count;
+                line.Count += count;
             }
         }
         public void RemoveItem(Game gadget, int count)

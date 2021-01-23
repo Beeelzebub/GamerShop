@@ -22,10 +22,19 @@ namespace ГеймерShop.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> MyAccount(RegisterViewModel model)
+        public async Task<IActionResult> PersonalRoom()
         {
             return View();
         }
+
+        public async Task<IActionResult> MyAccount()
+        {
+
+            return View();
+        }
+
+
+        
 
         [HttpGet]
         public IActionResult Register()
@@ -96,12 +105,10 @@ namespace ГеймерShop.Controllers
             return View(model);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Game");
+            return RedirectToAction("Index", "Games");
         }
     }
 }

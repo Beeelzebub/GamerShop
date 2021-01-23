@@ -6,20 +6,17 @@
 
 <h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Value)
+                Игра
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Game)
+                Ключ
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.KeyStatus)
+                Статус
             </th>
             <th></th>
         </tr>
@@ -28,20 +25,22 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Value)
+                @item.Game.Name
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Game.Id)
+                @item.Value
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.KeyStatus.Id)
+                @item.KeyStatus.Name
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+
+<div class="row justify-content-center link-game">
+    <a asp-controller="Games" asp-action="Management">Вернуться к листу</a>
+</div>

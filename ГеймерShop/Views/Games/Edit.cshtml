@@ -1,4 +1,4 @@
-﻿@model ГеймерShop.Models.Game
+﻿@model ГеймерShop.ViewModels.GameViewModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -14,34 +14,51 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <label asp-for="PictureId" class="control-label"></label>
-                <select asp-for="PictureId" class="form-control" asp-items="ViewBag.PictureId"></select>
-                <span asp-validation-for="PictureId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="SystemRequirementsId" class="control-label"></label>
-                <select asp-for="SystemRequirementsId" class="form-control" asp-items="ViewBag.SystemRequirementsId"></select>
-                <span asp-validation-for="SystemRequirementsId" class="text-danger"></span>
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="GenreId" class="control-label"></label>
                 <select asp-for="GenreId" class="form-control" asp-items="ViewBag.GenreId"></select>
-                <span asp-validation-for="GenreId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="PlaingFieldId" class="control-label"></label>
                 <select asp-for="PlaingFieldId" class="form-control" asp-items="ViewBag.PlaingFieldId"></select>
-                <span asp-validation-for="PlaingFieldId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" class="form-control" />
-                <span asp-validation-for="Price" class="text-danger"></span>
+                <label asp-for="OS" class="control-label"></label>
+                <input asp-for="OS" class="form-control" list="OSs" />
+                <span asp-validation-for="OS" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CPU" class="control-label"></label>
+                <input asp-for="CPU" class="form-control" list="CPUs" />
+                <span asp-validation-for="CPU" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RAM" class="control-label"></label>
+                <input asp-for="RAM" class="form-control" list="RAMs" />
+                <span asp-validation-for="RAM" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GPU" class="control-label"></label>
+                <input asp-for="GPU" class="form-control" list="GPUs" />
+                <span asp-validation-for="GPU" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Memory" class="control-label"></label>
+                <input asp-for="Memory" class="form-control" list="Memory" />
+                <span asp-validation-for="Memory" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Image" class="control-label">Изображение</label>
+                <input name="Image" type="file" class="form-control" />
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
@@ -51,7 +68,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Management">Назад</a>
 </div>
 
 @section Scripts {

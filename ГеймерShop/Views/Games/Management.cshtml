@@ -1,0 +1,73 @@
+﻿@model IEnumerable<ГеймерShop.Models.Game>
+
+<div class="row header-game"></div>
+<div class="container-fluid panel text-game">
+    
+    <h1>Management</h1>
+
+    <p>
+        <a class="mr-1" asp-action="Create">Добавить игру</a>
+        <a asp-controller="Keys" asp-action="Create">Добавить ключ</a>
+    </p>
+    <table class="table text-game">
+        <thead>
+            <tr>
+                <th>
+                </th>
+                <th>
+                    Название
+                </th>
+                <th>
+                    Системные требования
+                </th>
+                <th>
+                    Жанр
+                </th>
+                <th>
+                    Игровая площадка
+                </th>
+                <th>
+                    Цена
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @if (item.Picture.Image != null)
+                        {
+                            <img style='width:135px; height:220px;' src="data:image/jpeg;base64,@(Convert.ToBase64String(item.Picture.Image))" />
+                        }
+                    </td>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>
+                        <span class="">ОС: @item.SystemRequirements.OS </span> <br />
+                        <span>Процессор: @item.SystemRequirements.CPU </span> <br />
+                        <span>ОЗУ: @item.SystemRequirements.RAM </span> <br />
+                        <span>Видеокарта: @item.SystemRequirements.GPU </span> <br />
+                        <span>Место на диске: @item.SystemRequirements.Memory </span> <br />
+                    </td>
+                    <td>
+                        @item.Genre.Name
+                    </td>
+                    <td>
+                        @item.PlaingField.Name
+                    </td>
+                    <td>
+                        @item.Price
+                    </td>
+                    <td>
+                        <a asp-controller="Keys" asp-action="Index" asp-route-id="@item.Id">Ключи</a> <br />
+                        <a asp-action="Edit" asp-route-id="@item.Id">Редактировать</a> <br />
+                        <a asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

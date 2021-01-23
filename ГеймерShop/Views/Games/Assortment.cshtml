@@ -1,5 +1,35 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@model IEnumerable<ГеймерShop.Models.Game>
+@if (Model.Count() == 0)
+{
+    <span> По вашему запросу ничего не найдено. </span>
+}
+else
+{
+    List<Game> row = new List<Game>(); int counter = 0; 
+    @foreach (var item1 in Model)
+    {
+        row.Add(item1);
+        counter++;
+        if (row.Count == 4 || (counter == Model.Count() && row.Count() != 0))
+        {
+            <div class="row justify-content-center">
+                @foreach (var item2 in row)
+                {
+                    <div class="product-wrap">
+                        <div class="product-item">
+                            <img src="data:image/jpeg;base64,@(Convert.ToBase64String(item2.Picture.Image))" width="215" height="267">
+                            <div class="product-buttons">
+                                <button onclick="AddInCart(@item2.Id)" class="button">В корзину</button>
+                            </div>
+                        </div>
+                        <div class="product-title">
+                            <a href="">@item2.Name</a>
+                            <span class="product-price">Br @item2.Price</span>
+                        </div>
+                    </div>
+                }
+                @{ row.Clear(); }
+            </div>
+        }
+    }
 }

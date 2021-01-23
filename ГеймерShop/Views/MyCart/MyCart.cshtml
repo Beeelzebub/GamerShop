@@ -1,0 +1,59 @@
+﻿@model ГеймерShop.Models.Cart
+<div class="header-game"></div>
+<div class="container panel">
+    @if (Model == null)
+    {
+        <div class="row justify-content-center">
+            <span class="text-game pt-5 pb-5">Ваша корзина пуста!</span>
+        </div>
+    }
+    else
+    {
+        <table class="table text-game">
+            <thead>
+                <tr>
+                    <th>
+                        Товар
+                    </th>
+                    <th>
+                        Цена
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model.Lines())
+                {
+                    <tr>
+                        <td>
+                            @item.Game.Name
+                        </td>
+                        <td>
+                            @item.Count x @item.Game.Price
+                        </td>
+                        <td>
+                            <a asp-action="Remove" asp-route-id="@item.Game.Id">Убрать</a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td class="text-right">
+                        Итого:
+                    </td>
+                    <td>
+                        @Model.GetSum()
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <div class="row justify-content-center">
+            <a type="button" asp-controller="MyCart" asp-action="PaymentInfo" class="btn buy-btn"> Оплатить </a>
+        </div>
+
+    }
+</div>

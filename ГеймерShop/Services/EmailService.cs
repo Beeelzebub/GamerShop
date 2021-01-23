@@ -6,7 +6,7 @@ namespace ГеймерShop
 {
     public class EmailService
     {
-        public async Task SendEmailAsync(string toName,string email, string subject, string message)
+        public async Task SendEmailAsync(string toName, string email, string subject, string message)
         {
             var emailMessage = new MimeMessage();
 

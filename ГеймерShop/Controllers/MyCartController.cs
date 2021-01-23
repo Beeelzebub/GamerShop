@@ -21,7 +21,7 @@ namespace ГеймерShop.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public IActionResult MyCart()
         {
             Cart cart = HttpContext.Session.Get<Cart>("cart");
             return View(cart);
@@ -91,18 +91,8 @@ namespace ГеймерShop.Controllers
             {
                 HttpContext.Session.Set<string>("email", model.Email);
 
-                if (model.PayType == 1)
-                {
-                    return View("CreditCardPay");
-                }
-                else if (model.PayType == 2)
-                {
-                    return View("YandexMoneyPay");
-                }
-                else
-                {
-                    return NotFound();
-                }
+                return View("Pay");
+               
             }
 
             return View(model);
@@ -128,12 +118,13 @@ namespace ГеймерShop.Controllers
                     {
                         keys.AddRange(keysTemp);
 
-                        emailBodyText += game.Name + ":\n";
+                        emailBodyText += game.Name + ": ";
 
                         foreach (var item2 in keysTemp)
                         {
-                            emailBodyText += item2.Value + "\n";
+                            emailBodyText += item2.Value + " ";
                         }
+                        emailBodyText +=  "\n";
                     }
                 }
 
@@ -158,7 +149,7 @@ namespace ГеймерShop.Controllers
             await _context.SaveChangesAsync();
 
             EmailService emailService = new EmailService();
-            await emailService.SendEmailAsync(order.Email, order.Customer.UserName ,"Ваша покупка", emailBodyText);
+            await emailService.SendEmailAsync(order.Customer.UserName, order.Email, "Ваша покупка", emailBodyText);
 
             HttpContext.Session.Set<Cart>("cart", null);
 
@@ -191,11 +182,16 @@ namespace ГеймерShop.Controllers
             if (game != null)
             {
                 cart.RemoveItem(game, 1);
-                //доделать
+
+                if (cart.Lines().Count() == 0)
+                {
+                    cart = null;
+                }
+
                 HttpContext.Session.Set<Cart>("cart", cart);
             }
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(MyCart));
         }
     }
 }

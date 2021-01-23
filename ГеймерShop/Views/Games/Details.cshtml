@@ -1,54 +1,47 @@
 ﻿@model ГеймерShop.Models.Game
 
-@{
-    ViewData["Title"] = "Details";
-}
-
-<h1>Details</h1>
-
-<div>
-    <h4>Game</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Picture)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Picture.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SystemRequirements)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SystemRequirements.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Genre)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Genre.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PlaingField)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PlaingField.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+<div class="header-game"></div>
+<div class="container panel text-game">
+    <div class="row pt-3">
+        <div class="col-3">
+            <div class="row justify-content-center">
+                <img class="mt-3" src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.Picture.Image))" width="215" height="315">
+            </div>
+            <div class="row justify-content-center pt-5 pb-5">
+                <div class="col">
+                    <div class="row justify-content-center">
+                        <button onclick="AddInCart(@Model.Id)" class="btn btn-outlined btn-game">В корзину</button>
+                    </div>
+                    <div class="row justify-content-center mt-1">Br @Model.Price</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-9">
+            <div class="col">
+                <div class="row mt-1">
+                    <h1>@Model.Name</h1>
+                </div>
+                <div class="row">
+                    <div class="col-7">
+                        <dl>
+                            <dt>Системные требования</dt>
+                            <dd>ОС: @Model.SystemRequirements.OS </dd>
+                            <dd>Процессор: @Model.SystemRequirements.CPU </dd>
+                            <dd>ОЗУ: @Model.SystemRequirements.RAM </dd>
+                            <dd>Видеокарта: @Model.SystemRequirements.GPU </dd>
+                            <dd>Место на диске: @Model.SystemRequirements.Memory </dd>
+                        </dl>
+                    </div>
+                    <div class="col-5">
+                        <dl>
+                            <dt>Жанр</dt>
+                            <dd>@Model.Genre.Name</dd>
+                            <dt>Игровая площадка</dt>
+                            <dd>@Model.PlaingField.Name</dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
