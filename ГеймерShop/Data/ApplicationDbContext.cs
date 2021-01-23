@@ -43,10 +43,10 @@ namespace ГеймерShop.Data
                     new Genre { Id = 4, Name = "Стратегия"},
                     new Genre { Id = 5, Name = "Симулятор"},
                     new Genre { Id = 6, Name = "Онлайн"},
-                    new Genre { Id = 1, Name = "Инди"},
-                    new Genre { Id = 2, Name = "Спорт"},
-                    new Genre { Id = 3, Name = "Шутер"},
-                    new Genre { Id = 4, Name = "Платформер"}
+                    new Genre { Id = 7, Name = "Инди"},
+                    new Genre { Id = 8, Name = "Спорт"},
+                    new Genre { Id = 9, Name = "Шутер"},
+                    new Genre { Id = 10, Name = "Платформер"}
                });
             modelBuilder.Entity<PlaingField>().HasData(
                new PlaingField[]
